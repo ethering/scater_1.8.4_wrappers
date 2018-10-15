@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#!/usr/bin/env Rscript \n#Filters a SingleCellExperiment object, using PCA on the following metrics:\n# \"pct_counts_top_100_features\"\n# \"total_features\"\n# \"pct_counts_feature_control\"\n# \"total_features_feature_control\"\n# \"log10_total_counts_endogenous\"\n# \"log10_total_counts_feature_control\"\n\n# Load optparse we need to check inputs\nsuppressPackageStartupMessages(require(optparse))\nsuppressPackageStartupMessages(require(workflowscriptscommon))\nsuppressPackageStartupMessages(require(SingleCellExperiment))\nsuppressPackageStartupMessages(require(scater))\n\n# parse options\noption_list = list(\n  make_option(\n    c(\"-i\", \"--input-object-file\"),\n    action = \"store\",\n    default = NA,\n    type = 'character',\n    help = \"A serialized SingleCellExperiment object file in RDS format.\"\n  ),\n  make_option(\n    c(\"-d\", \"--detection-limit\"),\n    action = \"store\",\n    default = 0,\n    type = 'numeric',\n    help = \"Numeric scalar providing the value above which observations are deemed to be expressed\"\n  ),\n  make_option(\n    c(\"-l\", \"--library-size\"),\n    action = \"store\",\n    default = 0,\n    type = 'numeric',\n    help = \"Minimum library size (mapped reads) to fillter cells on\"\n  ),\n  make_option(\n    c(\"-m\", \"--percent-counts-MT\"),\n    action = \"store\",\n    default = 100,\n    type = 'numeric',\n    help = \"Maximum % of mitochondrial genes expressed per cell. Cells that exceed this value will be filtered out.\"\n  ),\n  make_option(\n    c(\"-o\", \"--output-object-file\"),\n    action = \"store\",\n    default = NA,\n    type = 'character',\n    help = \"File name in which to store serialized SingleCellExperiment object.\"\n  )\n)\n\nopt <- wsc_parse_args(option_list, mandatory = c('input_object_file', 'output_object_file'))\n\n# Check parameter values\n\nif ( ! file.exists(opt$input_object_file)){\n  stop((paste('File', opt$input_object_file, 'does not exist')))\n}\n\n# Filter out unexpressed features\n\nsce <- readRDS(opt$input_object_file)\nprint(paste(\"Starting with\", ncol(sce), \"cells and\", nrow(sce), \"features.\"))\n\n#create a logical vector of features that are expressed (obove detection_limit)\nfeature_expressed <- nexprs(sce, detection_limit = opt$detection_limit, byrow=TRUE) > opt$detection_limit\nsce <- sce[feature_expressed, ]\n\n\nprint(paste(\"After filtering out unexpressed features: \", ncol(sce), \"cells and\", nrow(sce), \"features.\"))\n\n#Filter low library sizes\nsce$use <- sce$total_counts > opt$library_size\nsce <- sce[, colData(sce)$use]\n\nprint(paste(\"After filtering out low library counts: \", ncol(sce), \"cells and\", nrow(sce), \"features.\"))\n\n#Filter out high MT counts\n\nsce$use <- sce$pct_counts_MT < opt$percent_counts_MT\nsce <- sce[, colData(sce)$use]\n\nprint(paste(\"After filtering out high MT gene counts: \", ncol(sce), \"cells and\", nrow(sce), \"features.\"))\n\n\n# Output to a serialized R object\nsaveRDS(sce, file = opt$output_object_file)\n",
+    "created" : 1539172434910.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1138784105",
+    "id" : "3763747A",
+    "lastKnownWriteTime" : 1539191245,
+    "last_content_update" : 1539191245096,
+    "path" : "~/projects/single_cell/Galaxy/galaxy_tools/RCode/test_scater/scater_modules_1.8.4/scater-manual-filter.R",
+    "project_path" : "scater-manual-filter.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

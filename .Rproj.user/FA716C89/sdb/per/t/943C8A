@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#!/usr/bin/env Rscript \n#Filters a SingleCellExperiment object, using PCA on the following metrics:\n# \"pct_counts_top_100_features\"\n# \"total_features\"\n# \"pct_counts_feature_control\"\n# \"total_features_feature_control\"\n# \"log10_total_counts_endogenous\"\n# \"log10_total_counts_feature_control\"\n\n# Load optparse we need to check inputs\nsuppressPackageStartupMessages(require(optparse))\nsuppressPackageStartupMessages(require(workflowscriptscommon))\nsuppressPackageStartupMessages(require(SingleCellExperiment))\nsuppressPackageStartupMessages(require(scater))\n\n# parse options\noption_list = list(\n  make_option(\n    c(\"-i\", \"--input-object-file\"),\n    action = \"store\",\n    default = NA,\n    type = 'character',\n    help = \"A serialized SingleCellExperiment object file in RDS format.\"\n  ),\n  make_option(\n    c(\"-o\", \"--output-object-file\"),\n    action = \"store\",\n    default = NA,\n    type = 'character',\n    help = \"File name in which to store serialized SingleCellExperiment object.\"\n  )\n)\n\nopt <- wsc_parse_args(option_list, mandatory = c('input_object_file', 'output_object_file'))\n\n# Check parameter values\n\nif ( ! file.exists(opt$input_object_file)){\n  stop((paste('File', opt$input_object_file, 'does not exist')))\n}\n\n# Now we're hapy with the arguments, load Scater and do the work\n\nsuppressPackageStartupMessages(require(scater))\n\n# Input from serialized R object\n\nsce <- readRDS(opt$input_object_file)\nprint(paste(\"Starting with\", ncol(sce), \"cells and\", nrow(sce), \"features.\"))\nsce <- runPCA(sce, use_coldata = TRUE, detect_outliers = TRUE, return_sce = TRUE)\nsce$use <- !sce$outlier\ntable(sce$use)\nsce <- sce[, colData(sce)$use]\n\nprint(paste(\"Ending with\", ncol(sce), \"cells and\", nrow(sce), \"features.\"))\n\n\n# Output to a serialized R object\nsaveRDS(sce, file = opt$output_object_file)\n",
+    "created" : 1539271499955.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1897806127",
+    "id" : "943C8A",
+    "lastKnownWriteTime" : 1539170462,
+    "last_content_update" : 1539170462,
+    "path" : "~/projects/single_cell/Galaxy/galaxy_tools/RCode/test_scater/scater_modules_1.8.4/scater-pca-filter.R",
+    "project_path" : "scater-pca-filter.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
