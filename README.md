@@ -46,13 +46,13 @@ Takes SingleCellExperiment object (from RDS file) and lots a panel of read and f
 ./scater-plot-dist-scatter.R -i test-data/scater_qcready_sce.rds -o test-data/scater_reads_genes_dist.pdf
 ```
 
-![scater-plot-dist-scatter](images/scater_reads_genes_dist.pdf?raw=true)
+![scater-plot-dist-scatter](images/scater_reads_genes_dist.png?raw=true)
 ---
 `scater-plot-exprs-freq.R`   
 Plots mean expression vs % of expressing cells and provides information as to the number of genes expressed in 50% and 25% of cells. 
 
 
-![scater-plot-exprs-freq](images/scater_exprs_freq.pdf?raw=true)
+![scater-plot-exprs-freq](images/scater_exprs_freq.png?raw=true)
 ---
 
 `scater-pca-filter.R`   
