@@ -1,6 +1,6 @@
 # Wrappers for Scater v1.8.4
 
-This code wraps a number of [scater](https://bioconductor.org/packages/release/bioc/html/scater.html) functions, ultimately for their use in Galaxy wrappers. Each script can be used in isolation. Briefly, the `scater-create-qcmetric-ready-sce.R` script takes a sample x gene expression matrix (usually read-counts) and cell annotation file, creates a [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) object and runs scater's calculateQCMetrics function (using other supplied files such as ERCC's and mitochondrial gene features.  
+This code wraps a number of [scater](https://bioconductor.org/packages/release/bioc/html/scater.html) functions, ultimately for their use in Galaxy wrappers. Each script can be used in isolation. Briefly, the `scater-create-qcmetric-ready-sce.R` script takes a sample x gene expression matrix (usually read-counts) and cell annotation file, creates a [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) object and runs scater's calculateQCMetrics function (using other supplied files such as ERCC's and mitochondrial gene features).  
 Various filter scripts are provided, along with some plotting functions for QC.
 
 
@@ -23,7 +23,7 @@ Bioconductor version 3.7 (BiocInstaller 1.30.0), ?biocLite for help
 R-3.5.1 was used to develop the code. Earlier versions have not been tested.
 
 
-##Commands
+## Commands
 
 For help with any of the following scripts, run:  
  `<script-name> --help`
@@ -85,15 +85,15 @@ PCA plot of a normalised SingleCellExperiment object (use `scater-normalize.R` b
 ./scater-plot-pca.R -i test-data/scater_man_filtered_normalised.rds -c Treatment -p Mutation_Status -o test-data/scater_pca_plot.pdf
 ```
 
-##Typical workflow
+## Typical workflow
 
-####1. Read in data
+#### 1. Read in data
 
 ```
 ./scater-create-qcmetric-ready-sce.R -a test-data/counts.txt -c test-data/annotation.txt -f test-data/mt_controls.txt  -o test-data/scater_qcready_sce.rds
 ```
 
-####2. Visualise it
+#### 2. Visualise it
 Take a look at the distribution of library sizes, expressed features and mitochondrial genes.
 ```
 ./scater-plot-dist-scatter.R -i test-data/scater_qcready_sce.rds -o test-data/scater_reads_genes_dist.pdf
@@ -105,7 +105,7 @@ Then look at the distibution of genes across cells
 ```
 
 
-####3. Use the plots to decide on filtering paramters
+#### 3. Use the plots to decide on filtering paramters
 Option 1.
 Automatically filter on outliers
 
@@ -121,7 +121,7 @@ Manually filter
 ```
 
 
-####4. Visualise data again to see how the filtering performed
+#### 4. Visualise data again to see how the filtering performed
 
 ```
 ./scater-plot-dist-scatter.R -i test-data/scater_filtered.rds -o test-data/scater_filtered_genes_dist.pdf
@@ -129,13 +129,13 @@ Manually filter
 Decide if you're happy with the data. If not, try increasing or decreasing the filtering parameters.
 
 
-####5. Normalise data
+#### 5. Normalise data
 
 ```
 ./scater-normalize.R -i test-data/scater_filtered.rds -o test-data/scater_filtered_normalised.rds
 ```
 
-####6. Investigate other confounding factors
+#### 6. Investigate other confounding factors
 Plot the data (using PCA) and display various annotated properties of the cells
 
 ```
