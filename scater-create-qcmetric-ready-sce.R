@@ -14,7 +14,7 @@ option_list = list(
     action = "store",
     default = NA,
     type = 'character',
-    help = "Comma-separated list of file names specifying tsv-format matrices. All elements of the list must have the same dimensions, and dimension names (if present) must be consistent across elements and with the row names of rowRanges and colData. The first column of all files is assumed to be feature names."
+    help = "A tab-delimited expression matrix. The first column of all files is assumed to be feature names and the first row is assumed to be sample names."
   ),
   make_option(
     c("-n", "--assay-names"),
@@ -28,14 +28,14 @@ option_list = list(
     action = "store",
     default = NULL,
     type = 'character',
-    help = "Path to TSV format file describing the features. Row names, if present, become the row names of the SingleCellExperiment."
+    help = "Path to TSV (tab-delimited) format file describing the features. Row names from the expression matrix (-a), if present, become the row names of the SingleCellExperiment."
   ),
   make_option(
     c("-c", "--col-data"),
     action = "store",
     default = NULL,
     type = 'character',
-    help = "Path to TSV format file describing the samples. Row names, if present, become the column names of the SummarizedExperiment object. The number of rows of the DataFrame must equal the number of rows of the matrices in assays."
+    help = "Path to TSV format file describing the samples (annotation). The number of rows (samples) must equal the number of columns in the expression matrix."
   ),
   make_option(
     c("-s", "--spike-names"),
@@ -50,28 +50,28 @@ option_list = list(
     action = "store",
     default = 'counts',
     type = 'character',
-    help= "character(1), indicating slot of the 'assays' of the 'object' that should be used to define expression. Valid options are 'counts' [default; recommended],'tpm','fpkm' and 'logcounts', or anything else in the object added manually by the user."
+    help= "String, indicating slot of the 'assays' of the 'object' that should be used to define expression. Valid options are 'counts' [default; recommended],'tpm','fpkm' and 'logcounts', or anything else in the object added manually by the user."
   ),
   make_option(
     c("-f", "--mt-controls"),
     action = "store",
     default = NULL,
     type = 'character',
-    help = "file containing a list of the control files with one file per line. Each control file should have one feature (e.g. gene) per line. A named list is created (names derived from control file names) containing one or more vectors to identify feature controls (for example, ERCC spike-in genes, mitochondrial genes, etc)"
+    help = "Path to file containing a list of the mitochondrial control genes"
   ),
   make_option(
     c("-p", "--ercc-controls"),
     action = "store",
     default = NULL,
     type = 'character',
-    help = "file containing a list of the control files with one file per line. Each control file should have one feature (e.g. gene) per line. A named list is created (names derived from control file names) containing one or more vectors to identify feature controls (for example, ERCC spike-in genes, mitochondrial genes, etc)"
+    help = "Path to file containing a list of the ERCC controls"
   ),
   make_option(
     c("-l", "--cell-controls"),
     action = "store",
     default = NULL,
     type = 'character',
-    help = "file (one cell per line) to be used to derive a vector of cell (sample) names used to identify cell controls (for example, blank wells or bulk controls)."
+    help = "Path to file (one cell per line) to be used to derive a vector of cell (sample) names used to identify cell controls (for example, blank wells or bulk controls)."
   ),
   make_option(
     c("-o", "--output-object-file"),
