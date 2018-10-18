@@ -37,13 +37,6 @@ option_list = list(
     type = 'character',
     help = "Path to TSV format file describing the samples (annotation). The number of rows (samples) must equal the number of columns in the expression matrix."
   ),
-  make_option(
-    c("-s", "--spike-names"),
-    action = "store",
-    default = NA,
-    type = 'character',
-    help = "Path to file containing spike names (column 1) and types (e.g. ERCC, column 2), in TSV format."
-  ),
   #The scater-specific options
   make_option(
     c("-e", "--exprs-values"),
@@ -108,19 +101,6 @@ if ( ! is.null(opt$col_data) ){
 sce <- SingleCellExperiment( assays = list(counts = as.matrix(reads)), colData = coldata, rowData = rowdata)
 # Define spikes (if supplied)
 
-if ( ! is.na(opt$spike_names) ){
-  
-  if ( ! file.exists(opt$spike_names) ){
-    stop(paste("Supplied spikes file", opt$spike_names, "does not exist"))
-  }
-  
-  spike_names <- read.table(opt$spike_names)
-  
-  spikes_by_type <- split(spike_names, spike_names$V2)
-  for ( st in names(spikes_by_type) ){
-    isSpike(single_cell_experiment, st) <- match(spikes_by_type[[st]]$V1, rownames(single_cell_experiment))
-  }
-}
 
 #Scater options
 
