@@ -13,11 +13,9 @@ The scripts can be used direclty from the command line, althought the following 
 ```
 >source("https://bioconductor.org/biocLite.R")
 Bioconductor version 3.7 (BiocInstaller 1.30.0), ?biocLite for help
->biocLite("SingleCellExperiment")
 >biocLite("scater")           #Should install >= scater-1.8.4
 >devtools::install_github("ebi-gene-expression-group/workflow-scripts-common")
->devtools::install_github("optparse", "trevorld")
->install.packages("ggpubr")
+>install.packages(c("ggpubr", "optparse"))
 
 ```
 R-3.5.1 was used to develop the code. Earlier versions have not been tested.
