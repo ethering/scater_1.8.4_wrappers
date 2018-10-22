@@ -12,6 +12,7 @@ suppressPackageStartupMessages(require(optparse))
 suppressPackageStartupMessages(require(workflowscriptscommon))
 suppressPackageStartupMessages(require(SingleCellExperiment))
 suppressPackageStartupMessages(require(scater))
+suppressPackageStartupMessages(require(mvoutlier))
 
 # parse options
 option_list = list(
