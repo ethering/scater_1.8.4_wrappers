@@ -46,19 +46,20 @@ total_features <- sce$total_features
 count_feats <- cbind(total_counts, total_features)
 cf_dm <- as.data.frame(count_feats)
 
-plot <- ggplot(cf_dm, aes(x=total_counts/1e6, y=total_features)) + geom_point(shape=1) + geom_smooth() + xlab("Read count (millions)") + 
-   ylab("Feature count") + ggtitle("Scatterplot of reads vs features")
-
 #calculate binwidths for reads and features plots. Use 20 bins
 read_bins <- max(total_counts/1e6)/20
 feat_bins <- max(total_features)/20
+
 #make the plots
-plot1 <- qplot(total_counts/1e6, geom="histogram", binwidth = read_bins, ylab="Number of cells", xlab = "Read counts (millions)", fill=I("darkseagreen3"))
-plot2 <- qplot(total_features, geom="histogram", binwidth = feat_bins, ylab="Number of cells", xlab = "Feature counts", fill=I("darkseagreen3"))
-plot3 <- plotColData(sce, y="pct_counts_MT", x="total_features_by_counts") + ggtitle("% MT genes")
+plot <- ggplot(cf_dm, aes(x=total_counts/1e6, y=total_features)) + geom_point(shape=1) + geom_smooth() + xlab("Read count (millions)") + 
+   ylab("Feature count") + ggtitle("Scatterplot of reads vs features")
+plot1 <- qplot(total_counts/1e6, geom="histogram", binwidth = read_bins, ylab="Number of cells", xlab = "Read counts (millions)", fill=I("darkseagreen3")) + ggtitle("Read counts per cell")
+plot2 <- qplot(total_features, geom="histogram", binwidth = feat_bins, ylab="Number of cells", xlab = "Feature counts", fill=I("darkseagreen3")) + ggtitle("Feature counts per cell")
+plot3 <- plotColData(sce, y="pct_counts_MT", x="total_features_by_counts") + ggtitle("% MT genes") + geom_point(shape=1) + theme(text = element_text(size=15)) + theme(plot.title = element_text(size=15))
+
 
 #arrange them all together
-library(ggpubr)
+suppressPackageStartupMessages(require(ggpubr))
 
 final_plot <- ggarrange(plot1, plot2, plot, plot3, ncol=2, nrow=2)
 ggsave(opt$output_plot_file,final_plot)
