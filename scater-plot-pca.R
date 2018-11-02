@@ -1,11 +1,10 @@
 #!/usr/bin/env Rscript 
 
-# Creates a PCA plot of a normailsed SingleCellExperiment object.
+# Creates a PCA plot of a normalised SingleCellExperiment object.
 
 # Load optparse we need to check inputs
 
 suppressPackageStartupMessages(require(scater))
-suppressPackageStartupMessages(require(SingleCellExperiment))
 suppressPackageStartupMessages(require(workflowscriptscommon))
 suppressPackageStartupMessages(require(optparse))
 
@@ -45,7 +44,7 @@ option_list = list(
     action = "store",
     default = NA,
     type = 'character',
-    help = "A jpg file to save plot to, e.g Reads.plot."
+    help = "Path of the PDF output file to save plot to."
   )
 )
 
@@ -65,4 +64,4 @@ sce_norm <- runPCA(sce)
 plot <- plotReducedDim(sce_norm, "PCA", colour_by = opt$colour_by, size_by = opt$size_by, shape_by = opt$shape_by)
 #do the scatter plot of reads vs genes
 
-ggsave(opt$output_plot_file,plot)
+ggsave(opt$output_plot_file, plot, device="pdf")
