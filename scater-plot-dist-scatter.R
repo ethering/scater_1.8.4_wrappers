@@ -24,7 +24,7 @@ option_list = list(
     action = "store",
     default = NA,
     type = 'character',
-    help = "A jpg file to save plot to, e.g Reads.plot."
+    help = "Path of the PDF output file to save plot to."
   )
 )
 
@@ -57,9 +57,5 @@ plot1 <- qplot(total_counts/1e6, geom="histogram", binwidth = read_bins, ylab="N
 plot2 <- qplot(total_features, geom="histogram", binwidth = feat_bins, ylab="Number of cells", xlab = "Feature counts", fill=I("darkseagreen3")) + ggtitle("Feature counts per cell")
 plot3 <- plotColData(sce, y="pct_counts_MT", x="total_features_by_counts") + ggtitle("% MT genes") + geom_point(shape=1) + theme(text = element_text(size=15)) + theme(plot.title = element_text(size=15))
 
-
-#arrange them all together
-suppressPackageStartupMessages(require(ggpubr))
-
 final_plot <- ggarrange(plot1, plot2, plot, plot3, ncol=2, nrow=2)
-ggsave(opt$output_plot_file,final_plot)
+ggsave(opt$output_plot_file, final_plot, device="pdf")

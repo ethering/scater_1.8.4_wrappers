@@ -4,7 +4,6 @@
 # Load optparse we need to check inputs
 
 suppressPackageStartupMessages(require(scater))
-suppressPackageStartupMessages(require(SingleCellExperiment))
 suppressPackageStartupMessages(require(workflowscriptscommon))
 suppressPackageStartupMessages(require(optparse))
 
@@ -46,4 +45,3 @@ print(paste("Starting with", ncol(sce), "cells and", nrow(sce), "features."))
 #produce and save the scatter plot of reads vs genes
 plot <- plotExprsFreqVsMean(sce,controls = "is_feature_control_MT")
 ggsave(opt$output_plot_file, plot)
-
