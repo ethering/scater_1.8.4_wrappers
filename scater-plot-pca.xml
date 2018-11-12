@@ -1,7 +1,7 @@
 <tool id="scater-plot-pca" name="Scater PCA plot" version="@TOOL_VERSION@">
     <description>for single-cell RNA-seq analysis</description>
     <macros>
-        <token name="@TOOL_VERSION@">1.8.4</token>
+        <import>macros.xml</import>
     </macros>
     <requirements>
         <requirement type="package" version="@TOOL_VERSION@">bioconductor-scater</requirement>
@@ -23,7 +23,7 @@
 -o '$output_plot'
     ]]></command>
     <inputs>
-        <param name="input_sce" type="data" format="rdata.sce,rdata" label="Input SingleCellExperiment dataset" />
+        <param name="input_sce" type="data" format="rdata.sce" label="Input SingleCellExperiment dataset" />
         <param name="colour_by" argument="--colour-by" type="text" optional="true" label="Feature (from annotation file) to colour PCA plot points by" help="The values represented in this options should be categorical" />
         <param name="size_by" argument="--size-by" type="text" optional="true" label="Feature (from annotation file) to size PCA plot points by" help="The values represented in this options should be numerical and not categorical" />
         <param name="shape_by" argument="--shape-by" type="text" optional="true" label="Feature (from annotation file) to shape PCA plot points by" help="The values represented in this options should be categorical" />
@@ -33,14 +33,14 @@
     </outputs>
     <tests>
         <test>
-            <param name="input_sce" value="scater_filtered_normalised.rds" ftype="rdata" />
+            <param name="input_sce" value="scater_filtered_normalised.rds" ftype="rdata.sce" />
             <param name="colour_by" value="Treatment" />
             <param name="shape_by" value="Mutation_Status" />
             <output name="output_plot" file="scater_pca_plot.pdf" compare="sim_size" />
         </test>
     </tests>
     <help><![CDATA[
-Creates a PCA plot of a normalised SingleCellExperiment object.
+Creates a PCA plot of a normalised SingleCellExperiment object using Scater.
     ]]></help>
     <citations>
         <citation type="doi">10.1093/bioinformatics/btw777</citation>

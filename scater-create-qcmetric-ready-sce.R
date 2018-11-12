@@ -3,7 +3,6 @@
 
 suppressPackageStartupMessages(require(optparse))
 suppressPackageStartupMessages(require(workflowscriptscommon))
-suppressPackageStartupMessages(require(SingleCellExperiment))
 suppressPackageStartupMessages(require(scater))
 
 # parse options
@@ -15,13 +14,6 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "A tab-delimited expression matrix. The first column of all files is assumed to be feature names and the first row is assumed to be sample names."
-  ),
-  make_option(
-    c("-n", "--assay-names"),
-    action = "store",
-    default = 'counts',
-    type = 'character',
-    help = "Comma-separated list of assay names. If this is not specified, and only a single assay is provided, this will be 'counts'. Otherwise assay names will be derived from input files"
   ),
   make_option(
     c("-r", "--row-data"),
