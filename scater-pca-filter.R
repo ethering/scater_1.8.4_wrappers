@@ -10,7 +10,6 @@
 # Load optparse we need to check inputs
 suppressPackageStartupMessages(require(optparse))
 suppressPackageStartupMessages(require(workflowscriptscommon))
-suppressPackageStartupMessages(require(SingleCellExperiment))
 suppressPackageStartupMessages(require(scater))
 suppressPackageStartupMessages(require(mvoutlier))
 

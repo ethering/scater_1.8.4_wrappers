@@ -11,9 +11,6 @@
     <command detect_errors="exit_code"><![CDATA[
 '$__tool_directory__/scater-create-qcmetric-ready-sce.R'
 -a '$counts'
-#if $row_data:
-    -r '$row_data'
-#end if
 #if $col_data:
     -c '$col_data'
 #end if
@@ -31,8 +28,7 @@
     ]]></command>
     <inputs>
         <param name="counts" type="data" format="tabular" label="Expression matrix in tabular format" help="The first column of all files is assumed to be feature names and the first row is assumed to be sample names" />
-        <param name="row_data" type="data" format="tabular" optional="true" label="Format dataset describing the features in tabular format" help="Row names from the expression matrix, if present, become the row names of the SingleCellExperiment" />
-        <param name="col_data" type="data" format="tabular" optional="true" label="" help="The number of rows (samples) must equal the number of columns in the expression matrix" />
+        <param name="col_data" type="data" format="tabular" optional="true" label="Format dataset describing the features in tabular format" help="The number of rows (samples) must equal the number of columns in the expression matrix" />
         <param name="exprs_values" type="select" label="Slot of the 'assays' of the 'object' that should be used to define expression">
             <option value="counts">counts</option>
             <option value="tpm">tpm</option>
