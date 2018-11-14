@@ -19,7 +19,7 @@
     </outputs>
     <tests>
         <test>
-            <param name="input_sce" value="scater_qcready_sce.rds" />
+            <param name="input_sce" value="scater_qcready_sce.rds" ftype="rdata.sce" />
             <output name="output_plot" file="scater_reads_genes_dist.pdf" compare="sim_size" />
         </test>
     </tests>
