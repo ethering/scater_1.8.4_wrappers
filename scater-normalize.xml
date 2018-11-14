@@ -18,7 +18,7 @@
     <tests>
         <test>
             <param name="input_sce" value="scater_filtered_normalised.rds" ftype="rdata.sce" />
-            <output name="output_sce" file="scater_normalised.rds" compare="sim_size" />
+            <output name="output_sce" file="scater_filtered_normalised.rds" compare="sim_size" />
         </test>
     </tests>
     <help><![CDATA[
