@@ -1,4 +1,4 @@
-<tool id="scater-manual=filter" name="Manually filter SingleCellExperiment" version="@TOOL_VERSION@">
+<tool id="scater-manual=filter" name="Scater manually filter SingleCellExperiment" version="@TOOL_VERSION@">
     <description>with user-defined parameters</description>
     <macros>
         <import>macros.xml</import>
