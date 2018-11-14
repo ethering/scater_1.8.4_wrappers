@@ -39,9 +39,7 @@ if ( ! file.exists(opt$input_object_file)){
 # Input from serialized R object
 
 sce <- readRDS(opt$input_object_file)
-print(paste("Starting with", ncol(sce), "cells and", nrow(sce), "features."))
-
 
 #produce and save the scatter plot of reads vs genes
 plot <- plotExprsFreqVsMean(sce,controls = "is_feature_control_MT")
-ggsave(opt$output_plot_file, plot)
+ggsave(opt$output_plot_file, plot, device="pdf")
