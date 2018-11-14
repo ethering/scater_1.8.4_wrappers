@@ -1,4 +1,4 @@
-<tool id="scater-normailze" name="Scater normalize" version="@TOOL_VERSION@">
+<tool id="scater-normalize" name="Scater normalize" version="@TOOL_VERSION@">
     <description>for single-cell RNA-seq analysis</description>
     <macros>
         <import>macros.xml</import>
