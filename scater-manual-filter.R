@@ -1,11 +1,5 @@
 #!/usr/bin/env Rscript 
-#Filters a SingleCellExperiment object, using PCA on the following metrics:
-# "pct_counts_top_100_features"
-# "total_features"
-# "pct_counts_feature_control"
-# "total_features_feature_control"
-# "log10_total_counts_endogenous"
-# "log10_total_counts_feature_control"
+# Manually filter SingleCellExperiment with user-defined parameters
 
 # Load optparse we need to check inputs
 suppressPackageStartupMessages(require(optparse))
