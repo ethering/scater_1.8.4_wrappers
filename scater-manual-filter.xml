@@ -29,15 +29,15 @@
     </outputs>
     <tests>
         <test>
-            <param name="input_sce" value="scater_filtered_normalised.rds" ftype="rdata.sce" />
-            <param name="detection_limit" value="3" />
+            <param name="input_sce" value="scater_qcready_sce.rds" ftype="rdata.sce" />
+            <param name="detection_limit" value="4" />
             <param name="library_size" value="100000" />
-            <param name="percent_counts_MT" value="20" />
-            <output name="output_sce" file="scater_qcready_sce_filtered.rds" compare="sim_size" />
+            <param name="percent_counts_MT" value="33" />
+            <output name="output_sce" file="scater_manual_filtered.rds" compare="sim_size" />
         </test>
     </tests>
     <help><![CDATA[
-Manually filter SingleCellExperiment with user-defined parameters
+Manually filter SingleCellExperiment with user-defined parameters for single-cell RNA-seq analysis using Scater.
     ]]></help>
     <expand macro="citations" />
 </tool>
