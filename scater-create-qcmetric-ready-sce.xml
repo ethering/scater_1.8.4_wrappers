@@ -1,5 +1,5 @@
-<tool id="scater-create-qcmetric-ready-sce" name="Scater Calculate QC metrics" version="@TOOL_VERSION@">
-    <description>for single-cell RNA-seq analysis</description>
+<tool id="scater-create-qcmetric-ready-sce" name="Scater: Calculate QC metrics" version="@TOOL_VERSION@">
+    <description>Computes QC metrics from single-cell expression matrix</description>
     <macros>
         <import>macros.xml</import>
     </macros>

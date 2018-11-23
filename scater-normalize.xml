@@ -1,5 +1,5 @@
-<tool id="scater-normalize" name="Scater normalize" version="@TOOL_VERSION@">
-    <description>for single-cell RNA-seq analysis</description>
+<tool id="scater-normalize" name="Scater: normalize SCE" version="@TOOL_VERSION@">
+    <description>Compute normalised expression values for SCE </description>
     <macros>
         <import>macros.xml</import>
     </macros>

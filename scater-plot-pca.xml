@@ -1,5 +1,5 @@
-<tool id="scater-plot-pca" name="Scater PCA plot" version="@TOOL_VERSION@">
-    <description>for single-cell RNA-seq analysis</description>
+<tool id="scater-plot-pca" name="Scater: PCA plot" version="@TOOL_VERSION@">
+    <description>Plot cell-level reduced dimension of a normalised SCE</description>
     <macros>
         <import>macros.xml</import>
     </macros>

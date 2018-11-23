@@ -1,5 +1,5 @@
-<tool id="scater-plot-dist-scatter" name="Scater plot distribution of reads and features" version="@TOOL_VERSION@">
-    <description>for single-cell RNA-seq analysis</description>
+<tool id="scater-plot-dist-scatter" name="Scater: plot library QC" version="@TOOL_VERSION@">
+    <description>Create plots to visualise library size, feature counts and mito gene expression</description>
     <macros>
         <import>macros.xml</import>
     </macros>

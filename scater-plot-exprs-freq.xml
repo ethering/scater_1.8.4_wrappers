@@ -1,5 +1,5 @@
-<tool id="scater-plot-exprs-freq" name="Scater plot expression frequency " version="@TOOL_VERSION@">
-    <description>of reads and features from a SingleCellExperiment</description>
+<tool id="scater-plot-exprs-freq" name="Scater: plot expression frequency " version="@TOOL_VERSION@">
+    <description>Plot the frequency of expression against the mean expression level for SCE. </description>
     <macros>
         <import>macros.xml</import>
     </macros>
