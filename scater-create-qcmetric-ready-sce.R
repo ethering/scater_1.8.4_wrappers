@@ -106,7 +106,7 @@ if (! is.null(opt$mt_controls) && opt$mt_controls != 'NULL'){
 
   }
 }else{
-  mt_controls <- NULL
+  mt_controls <- character()
 }
 
 if (! is.null(opt$ercc_controls) && opt$ercc_controls != 'NULL'){
@@ -117,7 +117,8 @@ if (! is.null(opt$ercc_controls) && opt$ercc_controls != 'NULL'){
     
   }
 }else{
-  ercc_controls <- NULL
+  
+  ercc_controls <- character()
 }
 
 # Check cell_controls
@@ -128,7 +129,7 @@ if (! is.null(opt$cell_controls) && opt$cell_controls != 'NULL'){
     cell_controls <- readLines(opt$cell_controls)
   }
 }else{
-  cell_controls <- NULL
+  cell_controls <-character()
 }
 
 
