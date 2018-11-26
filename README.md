@@ -99,7 +99,7 @@ Take a look at the distribution of library sizes, expressed features and mitocho
 Then look at the distibution of genes across cells
 
 ```
-./scater-plot-exprs-freq.R -i  test-data/scater_qcready_sce.rds -o test-data/scater_exprs_freq.pdf
+./scater-plot-exprs-freq.R -i test-data/scater_qcready_sce.rds -o test-data/scater_exprs_freq.pdf
 ```
 
 

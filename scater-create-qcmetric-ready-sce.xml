@@ -25,7 +25,7 @@
     <inputs>
         <param name="counts" type="data" format="tabular" label="Expression matrix in tabular format" help="The first column of all files is assumed to be feature names and the first row is assumed to be sample names" />
         <param name="col_data" type="data" format="tabular" optional="true" label="Format dataset describing the features in tabular format" help="The number of rows (samples) must equal the number of columns in the expression matrix" />
-        <param name="exprs_values" type="select" label="Slot of the 'assays' of the 'object' that should be used to define expression">
+        <param name="exprs_values" type="text" value="counts" label="Slot of the 'assays' of the 'object' that should be used to define expression">
             <option value="counts">counts</option>
             <option value="tpm">tpm</option>
             <option value="fpkm">fpkm</option>
