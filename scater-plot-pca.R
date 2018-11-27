@@ -59,9 +59,9 @@ if ( ! file.exists(opt$input_object_file)){
 # Input from serialized R object
 
 sce <- readRDS(opt$input_object_file)
-
-sce_norm <- runPCA(sce)
-plot <- plotReducedDim(sce_norm, "PCA", colour_by = opt$colour_by, size_by = opt$size_by, shape_by = opt$shape_by)
+sce <- normalize(sce)
+sce <- runPCA(sce)
+plot <- plotReducedDim(sce, "PCA", colour_by = opt$colour_by, size_by = opt$size_by, shape_by = opt$shape_by)
 #do the scatter plot of reads vs genes
 
 ggsave(opt$output_plot_file, plot, device="pdf")
