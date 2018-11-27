@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript 
+#!/usr/bin/env Rscript
 #Creates a SingleCellExperiment object, which scater's calculateQCMetrics already applied
 
 suppressPackageStartupMessages(require(optparse))
@@ -35,7 +35,7 @@ option_list = list(
     action = "store",
     default = 'counts',
     type = 'character',
-    help= "String, indicating slot of the 'assays' of the 'object' that should be used to define expression. Valid options are 'counts' [default; recommended],'tpm','fpkm' and 'logcounts', or anything else in the object added manually by the user."
+    help= "String, indicating slot of the 'assays' of the 'object' that should be used to define expression."
   ),
   make_option(
     c("-f", "--mt-controls"),
@@ -90,23 +90,21 @@ if ( ! is.null(opt$col_data) ){
 
 # Now build the object
 
-sce <- SingleCellExperiment( assays = list(counts = as.matrix(reads)), colData = coldata, rowData = rowdata)
+sce <- SingleCellExperiment(assays = list(counts = as.matrix(reads)), colData = coldata, rowData = rowdata)
 # Define spikes (if supplied)
 
 
 #Scater options
 
 # Check feature_controls (only mitochondrial and ERCC used for now)
-
+feature_controls_list = list()
 if (! is.null(opt$mt_controls) && opt$mt_controls != 'NULL'){
   if (! file.exists(opt$mt_controls)){
     stop((paste('Supplied feature_controls file', opt$mt_controls, 'does not exist')))
   }else{
     mt_controls <- readLines(opt$mt_controls)
-
+    feature_controls_list[["MT"]] <- mt_controls
   }
-}else{
-  mt_controls <- character()
 }
 
 if (! is.null(opt$ercc_controls) && opt$ercc_controls != 'NULL'){
@@ -114,27 +112,26 @@ if (! is.null(opt$ercc_controls) && opt$ercc_controls != 'NULL'){
     stop((paste('Supplied feature_controls file', opt$ercc_controls, 'does not exist')))
   }else{
     ercc_controls <- readLines(opt$ercc_controls)
-    
+    feature_controls_list[["ERCC"]] <- ercc_controls
   }
 }else{
-  
   ercc_controls <- character()
 }
 
 # Check cell_controls
+cell_controls_list <- list()
 if (! is.null(opt$cell_controls) && opt$cell_controls != 'NULL'){
   if (! file.exists(opt$cell_controls)){
     stop((paste('Supplied feature_controls file', opt$cell_controls, 'does not exist')))
   }else{
     cell_controls <- readLines(opt$cell_controls)
+    cell_controls_list[["empty"]] <- cell_controls
   }
-}else{
-  cell_controls <-character()
 }
 
 
 # calculate QCMs
-sce  <- calculateQCMetrics(sce, exprs_values = opt$exprs_values, feature_controls = list(MT=mt_controls, ERCC=ercc_controls), cell_controls = list(empty = cell_controls))
+sce  <- calculateQCMetrics(sce, exprs_values = opt$exprs_values, feature_controls = feature_controls_list, cell_controls = cell_controls_list)
 
 # Output to a serialized R object
 saveRDS(sce, file = opt$output_object_file)
