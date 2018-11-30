@@ -127,13 +127,8 @@ Manually filter
 Decide if you're happy with the data. If not, try increasing or decreasing the filtering parameters.
 
 
-#### 5. Normalise data
 
-```
-./scater-normalize.R -i test-data/scater_filtered.rds -o test-data/scater_filtered_normalised.rds
-```
-
-#### 6. Investigate other confounding factors
+#### 5. Investigate other confounding factors
 Plot the data (using PCA) and display various annotated properties of the cells
 
 ```
