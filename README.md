@@ -8,7 +8,7 @@ Various filter scripts are provided, along with some plotting functions for QC.
 
 
 ## Install
-The scripts can be used direclty from the command line, althought the following R packages are required.
+The scripts can be used direclty from the command line, although the following R packages are required.
 
 ```
 >source("https://bioconductor.org/biocLite.R")
